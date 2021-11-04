@@ -13,9 +13,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Like> likeList;
+    private String content;
 
-    @OneToMany
-    private List<Comment> commentList;
+    private String img;
+
 }

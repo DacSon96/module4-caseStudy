@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,5 +30,21 @@ public class User {
 
     private List<Role> roles;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_post",
+    joinColumns = {@JoinColumn(name = "user_id")},
+    inverseJoinColumns = {@JoinColumn(name = "post_id")})
+    private Set<Post> post;
 
+    private Long age;
+
+    private String address;
+
+    private String word;
+
+    private String intro;
+
+    private String avatar;
+
+    private String cover;
 }
