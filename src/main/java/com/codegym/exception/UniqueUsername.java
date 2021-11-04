@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueUsernameValidator.class)
 public @interface UniqueUsername {
-    String message() default "* this username has already been registered";
+    String message() default "this username has already been registered";
 
     Class<?>[] groups() default {};
 

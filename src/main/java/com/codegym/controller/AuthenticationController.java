@@ -51,19 +51,15 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegistrationForm> register(@Valid @RequestBody RegistrationForm registrationForm, BindingResult bindingResult) throws RePasswordException {
-        if (!registrationForm.getPassword().equals(registrationForm.getRePassword())) {
-            throw new RePasswordException();
-        } else if (!bindingResult.hasFieldErrors()) {
-            User user = new User();
-            user.setUsername(registrationForm.getUsername());
-            user.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
-            user.setEmail(registrationForm.getEmail());
-            List<Role> roles = new ArrayList<>();
-            roles.add(new Role(2L, "ROLE_USER"));
-            user.setRoles(roles);
-            userService.save(user);
-        }
+    public ResponseEntity<RegistrationForm> register(@Valid @RequestBody RegistrationForm registrationForm) throws RePasswordException {
+        User user = new User();
+        user.setUsername(registrationForm.getUsername());
+        user.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
+        user.setEmail(registrationForm.getEmail());
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role(2L, "ROLE_USER"));
+        user.setRoles(roles);
+        userService.save(user);
         return new ResponseEntity<>(registrationForm, HttpStatus.OK);
     }
 }

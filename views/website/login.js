@@ -1,3 +1,24 @@
+$(document).ready(function () {
+    $("#login-form").validate({
+        rules: {
+            loginUsername: {
+                required: true,
+                minlength: 4,
+                maxlength: 20
+            },
+            loginPassword: {
+                required: true,
+                minlength: 4,
+                maxlength: 20
+            },
+        },
+        submitHandler: function (form) {
+            login();
+            return false;
+        }
+    });
+});
+
 function login() {
     let username = $('#login-username').val();
     let password = $('#login-password').val();
@@ -19,18 +40,38 @@ function login() {
             localStorage.setItem('currentUser', JSON.stringify(result));
             window.location.href = "index.html"
         }
+    }).fail(function (data) {
+        alert("Try again champ!");
     });
 }
 
-$(document).ready(function (){
-    $("#login-form").validate({
-        rules:{
-            loginUsername: "required",
-            loginPassword: "required"
+$(document).ready(function () {
+    $("#registration-form").validate({
+        rules: {
+            registerUsername: {
+                required: true,
+                minlength: 4,
+                maxlength: 20
+            },
+            registerPassword: {
+                required: true,
+                minlength: 4,
+                maxlength: 20
+            },
+            registerRePassword: {
+                required: true,
+                minlength: 4,
+                maxlength: 20,
+                equalTo: '#register-password'
+            },
+            registerEmail: {
+                required: true,
+                email: true
+            },
         },
-        submitHandler: function(form) {
-            login();
-            return false; // required to block normal submit since you used ajax
+        submitHandler: function (form) {
+            register();
+            return false;
         }
     });
 });
@@ -63,20 +104,5 @@ function register() {
     });
 }
 
-$(document).ready(function (){
-    $("#registration-form").validate({
-        rules:{
-            registerUsername: "required",
-            registerPassword: "required",
-            registerRePassword: "required",
-            registerEmail: {
-                required: true,
-                email: true
-            }
-        },
-        submitHandler: function(form) {
-            register();
-            return false; // required to block normal submit since you used ajax
-        }
-    });
-});
+
+

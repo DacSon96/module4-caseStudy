@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface UniqueEmail {
-    String message() default "* this email has already been registered";
+    String message() default "this email has already been registered";
 
     Class<?>[] groups() default {};
 

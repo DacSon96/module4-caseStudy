@@ -12,15 +12,15 @@ import javax.validation.constraints.Size;
 public class RegistrationForm {
     @UniqueUsername
     @NotEmpty
-    @Size(min = 5, max = 20)
+    @Size(min = 4, max = 20)
     private String username;
 
     @NotEmpty
-    @Size(min = 5, max = 20)
+    @Size(min = 4, max = 20)
     private String password;
 
     @NotEmpty
-    @Size(min = 5, max = 20)
+    @Size(min = 4, max = 20)
     private String rePassword;
 
     @UniqueEmail
