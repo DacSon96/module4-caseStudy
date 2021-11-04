@@ -39,7 +39,7 @@ public class User {
 
     private String address;
 
-    private String word;
+    private String work;
 
     private String intro;
 
