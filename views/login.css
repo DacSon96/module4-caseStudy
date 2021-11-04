@@ -73,3 +73,12 @@ label.error {
     font-size: 12px;
     color: red;
 }
+
+.bi-eye-custom {
+    float: right;
+    margin-top: -40px;
+    margin-right: 10px;
+    position: relative;
+    z-index: 1;
+    cursor:pointer;
+}

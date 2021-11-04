@@ -1,5 +1,7 @@
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
+
+
 var userSettings = document.querySelector(".user-settings");
 var darkBtn = document.getElementById("dark-button");
 var LoadMoreBackground =document.querySelector(".btn-LoadMore");

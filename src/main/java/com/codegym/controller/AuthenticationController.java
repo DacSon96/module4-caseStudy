@@ -1,6 +1,6 @@
 package com.codegym.controller;
 
-import com.codegym.exception.RePasswordException;
+import com.codegym.exception.RePasswordNotCorrectException;
 import com.codegym.model.dto.LoginForm;
 import com.codegym.model.dto.RegistrationForm;
 import com.codegym.model.entity.Role;
@@ -17,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -51,7 +50,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegistrationForm> register(@Valid @RequestBody RegistrationForm registrationForm) throws RePasswordException {
+    public ResponseEntity<RegistrationForm> register(@Valid @RequestBody RegistrationForm registrationForm) throws RePasswordNotCorrectException {
+        if (!registrationForm.getPassword().equals(registrationForm.getRePassword())) {
+            throw new RePasswordNotCorrectException();
+        }
         User user = new User();
         user.setUsername(registrationForm.getUsername());
         user.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
