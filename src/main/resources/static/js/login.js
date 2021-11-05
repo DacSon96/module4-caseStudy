@@ -41,7 +41,7 @@ function login() {
         type: 'POST',
         success: function (result) {
             localStorage.setItem('currentUser', JSON.stringify(result));
-            location.href = 'homePage.html'
+            location.href = '/home'
         }
     }).fail(function (data) {
         $('#login-error-box').html(
@@ -131,7 +131,7 @@ function register() {
         type: 'POST',
         success: function (result) {
             localStorage.setItem('currentUser', JSON.stringify(result));
-            window.location.href = 'homePage.html';
+            window.location.href = '/home';
 
         }
     }).fail(function (data) {
