@@ -22,6 +22,11 @@ public class PostController {
     @Autowired
     private IUserService userService;
 
+    @ModelAttribute
+    public Iterable<User> users(){
+        return userService.findAll();
+    }
+
     @GetMapping()
     public ResponseEntity<Iterable<Post>> getAllPost(){
         Iterable<Post> postOptional = postService.findAll();
