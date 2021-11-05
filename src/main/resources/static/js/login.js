@@ -182,3 +182,24 @@ togglePassword3.addEventListener('click', function (e) {
     // toggle the eye / eye slash icon
     this.classList.toggle('bi-eye');
 });
+
+$.ajax({
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+
+    },
+    data: {
+        content: '...',
+        user: {
+            id: currentUser.id
+        }
+    },
+    url: `http://localhost:8080/register`,
+    type: 'POST',
+    success: function (result) {
+        localStorage.setItem('currentUser', JSON.stringify(result));
+        window.location.href = '/home';
+
+    }
+})
