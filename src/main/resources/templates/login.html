@@ -30,11 +30,11 @@
                            placeholder="Username">
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" id="login-password" name="loginPassword"
+                    <input type="password" class="form-control password" id="login-password" name="loginPassword"
                            placeholder="Password">
-                    <span class="bi-eye-custom">
-                    <i class="bi bi-eye-slash" id="togglePassword1"></i>
-                    </span>
+<!--                    <span class="bi-eye-custom">-->
+<!--                    <i class="bi bi-eye-slash togglePassword" id="togglePassword1"></i>-->
+<!--                    </span>-->
                 </div>
                 <button type="submit" class="btn btn-custom btn-lg btn-block mt-3">Login</button>
                 <div class="text-center pt-3 pb-3">
@@ -53,7 +53,7 @@
 
 
 <!--Register Form-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form id="registration-form" method="post">
             <div class="modal-content">
@@ -71,18 +71,18 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" style="font-size: 18px">Password</label>
-                        <input type="password" class="form-control" id="register-password" name="registerPassword">
-                        <span class="bi-eye-custom">
-                        <i class="bi bi-eye-slash" id="togglePassword2"></i>
-                        </span>
+                        <input type="password" class="form-control password" id="register-password" name="registerPassword">
+<!--                        <span class="bi-eye-custom">-->
+<!--                        <i class="bi bi-eye-slash togglePassword" id="togglePassword2"></i>-->
+<!--                        </span>-->
                         <br>
                     </div>
                     <div class="col-12">
                         <label class="form-label" style="font-size: 18px">Confirm Password</label>
-                        <input type="password" class="form-control" id="register-re-password" name="registerRePassword">
-                        <span class="bi-eye-custom">
-                        <i class="bi bi-eye-slash" id="togglePassword3"></i>
-                        </span>
+                        <input type="password" class="form-control password" id="register-re-password" name="registerRePassword">
+<!--                        <span class="bi-eye-custom">-->
+<!--                        <i class="bi bi-eye-slash togglePassword" id="togglePassword3"></i>-->
+<!--                        </span>-->
                         <br>
                     </div>
                     <div class="col-12">
@@ -92,12 +92,26 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-custom">Sign up</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-custom">Sign up</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+</div>
+
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <div class="toast" data-delay="5000" style="position: absolute; top: 0; right: 0;">
+        <div class="toast-header">
+            <strong class="mr-auto">Thank you</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Success
+        </div>
+    </div>
 </div>
 
 

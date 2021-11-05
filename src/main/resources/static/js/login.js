@@ -15,7 +15,6 @@ $(document).ready(function () {
         },
         submitHandler: function (form) {
             login();
-            return false;
         }
     });
 });
@@ -88,22 +87,8 @@ $(document).ready(function () {
         },
         submitHandler: function (form) {
             register();
-            return false;
         }
     });
-});
-
-
-// REGISTER INPUT CLEAR
-function clear() {
-    username = $('#register-username').val('');
-    password = $('#register-password').val('');
-    rePassword = $('#register-re-password').val('');
-    email = $('#register-email').val('');
-};
-
-$('#btn-close').click(function () {
-    clear();
 });
 
 
@@ -131,8 +116,8 @@ function register() {
         type: 'POST',
         success: function (result) {
             localStorage.setItem('currentUser', JSON.stringify(result));
-            window.location.href = '/home';
-
+            $('#exampleModal').modal('hide');
+            alert("Registration Successful!");
         }
     }).fail(function (data) {
         $('#register-error-box').html(
@@ -152,33 +137,22 @@ function register() {
 };
 
 
-// SHOW & HIDE PASSWORD
-const togglePassword = document.querySelector('#togglePassword1');
-let password = document.querySelector('#login-password');
-togglePassword.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye / eye slash icon
-    this.classList.toggle('bi-eye');
+// REGISTRATION FORM CLEAR
+$('#btn-close').click(function () {
+    username = $('#register-username').val('');
+    password = $('#register-password').val('');
+    rePassword = $('#register-re-password').val('');
+    email = $('#register-email').val('');
+    $('#registration-form').data('validator').resetForm();
 });
 
-const togglePassword2 = document.querySelector('#togglePassword2');
-const password2 = document.querySelector('#register-password');
-togglePassword2.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
-    password2.setAttribute('type', type);
-    // toggle the eye / eye slash icon
-    this.classList.toggle('bi-eye');
-});
 
-const togglePassword3 = document.querySelector('#togglePassword3');
-const password3 = document.querySelector('#register-re-password');
-togglePassword3.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password3.getAttribute('type') === 'password' ? 'text' : 'password';
-    password3.setAttribute('type', type);
-    // toggle the eye / eye slash icon
-    this.classList.toggle('bi-eye');
-});
+// // SHOW & HIDE PASSWORD
+// const togglePassword = document.querySelector('.togglePassword');
+// let password = document.querySelector('.password');
+// $('.togglePassword').click(function () {
+//     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+//     password.setAttribute('type', type);
+//     this.classList.toggle('bi-eye');
+// });
+
