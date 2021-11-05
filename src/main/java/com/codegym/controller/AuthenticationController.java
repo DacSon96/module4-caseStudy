@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin("*")
@@ -58,7 +60,7 @@ public class AuthenticationController {
         user.setUsername(registrationForm.getUsername());
         user.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
         user.setEmail(registrationForm.getEmail());
-        List<Role> roles = new ArrayList<>();
+        Set<Role> roles = new HashSet<>();
         roles.add(new Role(2L, "ROLE_USER"));
         user.setRoles(roles);
         userService.save(user);

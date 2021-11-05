@@ -6,10 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class UserPrincipal implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -27,7 +24,7 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal build(User user) {
-        List<Role> roles = user.getRoles();
+        Set<Role> roles = user.getRoles();
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
