@@ -25,13 +25,7 @@ public class UserController {
      @Autowired
      private IPostService postService;
 
-     @GetMapping("{id}")
-     private Long getLoginId(@PathVariable Long id){
-         Long loginId = id;
-         return loginId;
-     }
-
-     @GetMapping("/user/{id}")
+     @GetMapping("/{id}")
     public ResponseEntity<Iterable<Post>> getMyPost(@PathVariable Long id){
          Optional<User> user = userService.findById(id);
          if (!user.isPresent()){
@@ -40,5 +34,6 @@ public class UserController {
          Iterable<Post> postIterable = postService.findAllByUser(user.get());
          return new ResponseEntity<>(postIterable,HttpStatus.ACCEPTED);
      }
+
 
 }

@@ -23,24 +23,29 @@ public class PostController {
     private IUserService userService;
 
     @ModelAttribute
-    public Iterable<User> users(){
+    public Iterable<User> users() {
         return userService.findAll();
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<Post>> getAllPost(){
+    public ResponseEntity<Iterable<Post>> getAllPost() {
         Iterable<Post> postOptional = postService.findAll();
         return new ResponseEntity<>(postOptional, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}/posts")
-    public ResponseEntity<?> getPostByUserId(@PathVariable Long id){
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getPostByUserId(@PathVariable Long id) {
         Optional<User> user = userService.findById(id);
         if (!user.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         Iterable<Post> postsByUser = postService.findAllByUser(user.get());
-        return new ResponseEntity<>(postsByUser,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(postsByUser, HttpStatus.ACCEPTED);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<Post> getPost(@PathVariable Long id) {
+        Optional<Post> post = postService.findById(id);
+        return new ResponseEntity<>(post.get(), HttpStatus.OK);
+    }
 }
