@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.DELETE, "/rest/**").hasRole("ROLE_ADMIN")
 //                .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
                 .anyRequest().authenticated()
-                .and().csrf().disable();
+                .and().csrf().disable().logout();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
         http.sessionManagement()

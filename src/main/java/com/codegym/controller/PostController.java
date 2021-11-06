@@ -14,38 +14,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/post")
 public class PostController {
     @Autowired
     private IPostService postService;
 
-    @Autowired
-    private IUserService userService;
 
-    @ModelAttribute
-    public Iterable<User> users() {
-        return userService.findAll();
-    }
-
-    @GetMapping()
+    @PostMapping("")
     public ResponseEntity<Iterable<Post>> getAllPost() {
         Iterable<Post> postOptional = postService.findAll();
         return new ResponseEntity<>(postOptional, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<?> getPostByUserId(@PathVariable Long id) {
-        Optional<User> user = userService.findById(id);
-        if (!user.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        Iterable<Post> postsByUser = postService.findAllByUser(user.get());
-        return new ResponseEntity<>(postsByUser, HttpStatus.ACCEPTED);
+    @PostMapping("/save")
+    public ResponseEntity<?> savePost(@RequestBody Post post) {
+        return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Post> getPost(@PathVariable Long id) {
-        Optional<Post> post = postService.findById(id);
-        return new ResponseEntity<>(post.get(), HttpStatus.OK);
-    }
 }
