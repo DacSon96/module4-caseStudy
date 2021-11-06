@@ -5,7 +5,6 @@ import com.codegym.model.entity.Post;
 import com.codegym.model.entity.User;
 import com.codegym.service.post.IPostService;
 import com.codegym.service.user.IUserService;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

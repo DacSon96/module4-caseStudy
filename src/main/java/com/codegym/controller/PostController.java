@@ -20,7 +20,7 @@ public class PostController {
     private IPostService postService;
 
 
-    @PostMapping("")
+    @GetMapping("")
     public ResponseEntity<Iterable<Post>> getAllPost() {
         Iterable<Post> postOptional = postService.findAll();
         return new ResponseEntity<>(postOptional, HttpStatus.OK);
@@ -29,6 +29,11 @@ public class PostController {
     @PostMapping("/save")
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
+    }
+    @PostMapping("{id}")
+    public ResponseEntity<?> findAllPostByUser(@RequestBody User user) {
+        Iterable<Post> userPosts = postService.findAllByUser(user);
+        return new ResponseEntity<>(userPosts, HttpStatus.OK);
     }
 
 }

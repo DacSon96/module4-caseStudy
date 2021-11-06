@@ -14,22 +14,19 @@
             let posts = {};
             let page = 1;
             getPostByPage();
-
         })
 
         function getPostByPage(){
             $.ajax({
-                url: "/post/list",
+                url: "/post",
                 method: "GET",
                 success: function (data) {
+                    let content = "";
                     for (let i = 0; i < data.length; i++) {
                         content += getPost(data[i]);
                     }
                     document.getElementById('postField').innerHTML = content;
                 },
-                error: function (error) {
-                    alert(error);
-                }
             });
         }
         function getPost(post){
@@ -38,7 +35,7 @@
                     <div class="user-profile">
                         <img src="/images/profile-pic.png" alt="">
                         <div>
-                            <p> Alex Carry</p>
+                            <p>${post.user.username}</p>
                             <small>August 13 1999, 09.18 pm</small>
                         </div>
                     </div>
@@ -47,9 +44,7 @@
                     </div>
                 </div>
                 <div class="status-field">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis dolores praesentium dicta
-                        laborum nihil accusantium odit laboriosam, sed sit autem! <a
-                            href="#">#This_Post_is_Better!!!!</a> </p>
+                    <p>${post.content}</a> </p>
                     <img src="/images/feed-image-1.png" alt="">
 
                 </div>
