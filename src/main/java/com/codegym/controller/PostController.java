@@ -32,11 +32,20 @@ public class PostController {
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
     }
+
     @GetMapping("/{userName}")
     public ResponseEntity<?> findAllPostByUser(@PathVariable String userName) {
         Optional<User> user = userService.findByUsername(userName);
-        Iterable<Post> postIterable= postService.findAllByUser(user.get());
-        return new ResponseEntity<>(postIterable, HttpStatus.OK);
+        if (!user.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            Iterable<Post> postIterable = postService.findAllByUser(user.get());
+            return new ResponseEntity<>(postIterable, HttpStatus.OK);
+        }
     }
 
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<?> removePost(@PathVariable Long id) {
+//        return new ResponseEntity<>(postService.remove(id), HttpStatus.OK);
+//    }
 }

@@ -3,7 +3,6 @@ let page = 1;
 let postPerPage = 5;
 let content = "";
 let currentUserName = currentUser.username;
-let currentUserId = currentUser.id;
 var userSettings = document.querySelector(".user-settings");
 var darkBtn = document.getElementById("dark-button");
 var LoadMoreBackground = document.querySelector(".btn-LoadMore");
@@ -25,6 +24,7 @@ function LoadMoreToggle() {
     page++;
     getPostByPage();
 };
+
 function LoadMoreToggleProfile() {
     page++;
     getMyPostByPage();
@@ -34,12 +34,17 @@ $(document).ready(function () {
     for (let i = 0; i < name.length; i++) {
         name[i].textContent = currentUserName;
     }
-    whatOnYourMind();
-    getMyPostByPage()
+    getUserDetail();
+    getMyPostByPage();
+
 })
-function whatOnYourMind(){
-    document.getElementById("whatOnYourMind").placeholder="What on your mind, "+currentUserName+"?";
+
+function getUserDetail() {
+    document.getElementById("whatOnYourMind").placeholder = "What on your mind, " + currentUserName + "?";
+    document.getElementById("myWork").innerText = currentUser.work;
+    document.getElementById("myAddress").innerText = currentUser.address;
 }
+
 function getPostByPage() {
     $.ajax({
         url: "/post",
@@ -64,7 +69,7 @@ function getPost(post) {
     return `<div class="status-field-container write-post-container">
                 <div class="user-profile-box">
                     <div class="user-profile">
-                        <img src="/images/profile-pic.png" alt="">
+                        <img src="${post.user.avatar}" alt="">
                         <div>
                             <p>${post.user.username}</p>
                             <small>August 13 1999, 09.18 pm</small>
@@ -105,4 +110,6 @@ function showPost(data) {
     }
     document.getElementById('postField').innerHTML = content;
 }
+
+
 

@@ -61,13 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/static/**", "/css/**", "/js/**", "/images/**", "/", "/login", "/register", "/home","/post/**","/myProfile").permitAll()
-//                .antMatchers(HttpMethod.GET, "/rest/**").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
-//                .antMatchers(HttpMethod.POST, "/rest/**").hasRole("ROLE_ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/rest/**").hasRole("ROLE_ADMIN")
-//                .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
-                .and().csrf().disable().logout();
+                .and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
         http.sessionManagement()
