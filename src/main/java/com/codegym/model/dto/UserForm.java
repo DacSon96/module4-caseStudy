@@ -7,12 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserForm {
     private Long id;
 
-//    private String username;
-//
-//    private String password;
-//
-//    private String email;
-//
     private String intro;
 
     private String work;

@@ -7,7 +7,6 @@ import com.codegym.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -62,10 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
                 .antMatchers("/**").permitAll()
-//                .antMatchers(HttpMethod.GET, "/rest/**").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
-//                .antMatchers(HttpMethod.POST, "/rest/**").hasRole("ROLE_ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/rest/**").hasRole("ROLE_ADMIN")
-//                .antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

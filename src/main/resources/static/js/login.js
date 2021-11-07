@@ -163,7 +163,7 @@ function clear () {
 
 // SHOW TOAST
 function showToast() {
-    let toastLiveExample = document.getElementById('liveToast')
+    let toastLiveExample = document.getElementById('registerToast')
     let toast = new bootstrap.Toast(toastLiveExample)
     toast.show()
 }

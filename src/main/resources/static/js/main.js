@@ -31,3 +31,29 @@ function getUserById(){
     })
 };
 
+
+function editUserInfo() {
+    let form = new FormData($('#edit-user-info')[0]);
+
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + currentUser.accessToken
+        },
+        url: `http://localhost:8080/users/${currentUser.id}`,
+        type: 'PUT',
+        data: form,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function () {
+            location.href = "/profile"
+        }
+    })
+}
+
+function showToast() {
+    let toastLiveExample = document.getElementById('liveToast')
+    let toast = new bootstrap.Toast(toastLiveExample)
+    toast.show()
+}
