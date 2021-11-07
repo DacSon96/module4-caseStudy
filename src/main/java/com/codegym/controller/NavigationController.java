@@ -19,4 +19,9 @@ public class NavigationController {
     public String showProfilePage(){
         return("/profile");
     }
+
+    @GetMapping("/edit")
+    public String showEditPage(){
+        return("/edit-profile");
+    }
 }

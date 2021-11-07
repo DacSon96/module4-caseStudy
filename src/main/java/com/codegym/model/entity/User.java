@@ -29,10 +29,18 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Post> posts;
 
-    private String age;
-    private String address;
-    private String work;
+    @Column(columnDefinition = "varchar(255) default 'Your bio ...'")
     private String intro;
+
+    @Column(columnDefinition = "varchar(255) default 'Your work ...'")
+    private String work;
+
+    @Column(columnDefinition = "varchar(255) default 'Your address ...'")
+    private String address;
+
+    @Column(columnDefinition = "varchar(255) default '/images/default-avatar.png'")
     private String avatar;
+
+    @Column(columnDefinition = "varchar(255) default '/images/default-cover.png'")
     private String cover;
 }
