@@ -18,20 +18,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-     @Autowired
-    private IUserService userService;
 
-     @Autowired
-     private IPostService postService;
-
-     @GetMapping("/{id}")
-    public ResponseEntity<Iterable<Post>> getMyPost(@PathVariable Long id){
-         Optional<User> user = userService.findById(id);
-         if (!user.isPresent()){
-             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-         }
-         Iterable<Post> postIterable = postService.findAllByUser(user.get());
-         return new ResponseEntity<>(postIterable,HttpStatus.ACCEPTED);
+     @GetMapping("/myProfile")
+    public String getMyWall(){
+         return "/profile";
      }
 
 

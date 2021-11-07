@@ -19,6 +19,8 @@ public class PostController {
     @Autowired
     private IPostService postService;
 
+    @Autowired
+    private IUserService userService;
 
     @GetMapping("")
     public ResponseEntity<Iterable<Post>> getAllPost() {
@@ -30,10 +32,11 @@ public class PostController {
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
     }
-    @PostMapping("{id}")
-    public ResponseEntity<?> findAllPostByUser(@RequestBody User user) {
-        Iterable<Post> userPosts = postService.findAllByUser(user);
-        return new ResponseEntity<>(userPosts, HttpStatus.OK);
+    @GetMapping("{userName}")
+    public ResponseEntity<?> findAllPostByUser(@PathVariable String userName) {
+        Optional<User> user = userService.findByUsername(userName);
+        Iterable<Post> postIterable= postService.findAllByUser(user.get());
+        return new ResponseEntity<>(postIterable, HttpStatus.OK);
     }
 
 }

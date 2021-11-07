@@ -13,6 +13,11 @@
         $(document).ready(function () {
             let posts = {};
             let page = 1;
+            let myName = currentUser.username;
+            let name = document.getElementsByClassName("currentUserName");
+            for (let i = 0; i < name.length; i++) {
+                name[i].textContent = myName;
+            }
             getPostByPage();
         })
 
@@ -88,8 +93,8 @@
             <div class="user-profile">
                 <img src="/images/profile-pic.png" alt="">
                 <div>
-                    <p> Alex Carry</p>
-                    <a href="#">See your profile</a>
+                    <p class="currentUserName"></p>
+                    <a href="/user/myProfile">See your profile</a>
                 </div>
             </div>
             <div id="dark-button" onclick="darkModeON()">
@@ -179,7 +184,7 @@
                 <div class="user-profile">
                     <img src="/images/profile-pic.png" alt="">
                     <div>
-                        <p> Alex Carry</p>
+                        <p class="currentUserName"></p>
                         <small>Public <i class="fas fa-caret-down"></i></small>
                     </div>
                 </div>
