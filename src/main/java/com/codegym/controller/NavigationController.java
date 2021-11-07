@@ -14,4 +14,9 @@ public class NavigationController {
     public String showHomePage(){
         return("/index");
     }
+    @GetMapping("/myProfile")
+    public String showMyProfilePage(){
+        return("/profile");
+    }
+
 }

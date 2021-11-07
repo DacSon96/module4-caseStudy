@@ -19,10 +19,5 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-     @GetMapping("/myProfile")
-    public String getMyWall(){
-         return "/profile";
-     }
-
 
 }

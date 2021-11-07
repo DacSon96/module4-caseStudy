@@ -24,15 +24,15 @@ public class PostController {
 
     @GetMapping("")
     public ResponseEntity<Iterable<Post>> getAllPost() {
-        Iterable<Post> postOptional = postService.findAll();
-        return new ResponseEntity<>(postOptional, HttpStatus.OK);
+        Iterable<Post> postIterable = postService.findAll();
+        return new ResponseEntity<>(postIterable, HttpStatus.OK);
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
     }
-    @GetMapping("{userName}")
+    @GetMapping("/{userName}")
     public ResponseEntity<?> findAllPostByUser(@PathVariable String userName) {
         Optional<User> user = userService.findByUsername(userName);
         Iterable<Post> postIterable= postService.findAllByUser(user.get());

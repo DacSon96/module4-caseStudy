@@ -1,20 +1,108 @@
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
+let page = 1;
+let postPerPage = 5;
+let content = "";
+let currentUserName = currentUser.username;
+let currentUserId = currentUser.id;
 var userSettings = document.querySelector(".user-settings");
 var darkBtn = document.getElementById("dark-button");
-var LoadMoreBackground =document.querySelector(".btn-LoadMore");
-function UserSettingToggle(){
+var LoadMoreBackground = document.querySelector(".btn-LoadMore");
+
+function UserSettingToggle() {
     userSettings.classList.toggle("user-setting-showup-toggle");
 }
+
 // darkBtn.onclick = function(){
 //     darkBtn.classList.toggle("dark-mode-on");
 // }
 
-function darkModeON(){
+function darkModeON() {
     darkBtn.classList.toggle("dark-mode-on");
-   document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle("dark-theme");
 };
 
-function LoadMoreToggle(){
-    LoadMoreBackground.classList.toggle("loadMoreToggle");
+function LoadMoreToggle() {
+    page++;
+    getPostByPage();
 };
+function LoadMoreToggleProfile() {
+    page++;
+    getMyPostByPage();
+};
+$(document).ready(function () {
+    let name = document.getElementsByClassName("currentUserName");
+    for (let i = 0; i < name.length; i++) {
+        name[i].textContent = currentUserName;
+    }
+    whatOnYourMind();
+    getMyPostByPage()
+})
+function whatOnYourMind(){
+    document.getElementById("whatOnYourMind").placeholder="What on your mind, "+currentUserName+"?";
+}
+function getPostByPage() {
+    $.ajax({
+        url: "/post",
+        method: "GET",
+        success: function (data) {
+            showPost(data);
+        },
+    });
+}
+
+function getMyPostByPage() {
+    $.ajax({
+        url: "/post/" + currentUserName,
+        method: "GET",
+        success: function (data) {
+            showPost(data);
+        }
+    });
+}
+
+function getPost(post) {
+    return `<div class="status-field-container write-post-container">
+                <div class="user-profile-box">
+                    <div class="user-profile">
+                        <img src="/images/profile-pic.png" alt="">
+                        <div>
+                            <p>${post.user.username}</p>
+                            <small>August 13 1999, 09.18 pm</small>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                    </div>
+                </div>
+                <div class="status-field">
+                    <p>${post.content}</a> </p>
+                    <img src="/images/feed-image-1.png" alt="">
+
+                </div>
+                <div class="post-reaction">
+                    <div class="activity-icons">
+                        <div><img src="/images/like-blue.png" alt="">120</div>
+                        <div><img src="/images/comments.png" alt="">52</div>
+                        <div><img src="/images/share.png" alt="">35</div>
+                    </div>
+                    <div class="post-profile-picture">
+                        <img src="/images/profile-pic.png " alt=""> <i class=" fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>`
+}
+
+function showPost(data) {
+    content = "";
+    if (data.length <= (page * postPerPage)) {
+        for (let i = 0; i < data.length; i++) {
+            content += getPost(data[i]);
+        }
+    } else {
+        for (let i = 0; i < page * postPerPage; i++) {
+            content += getPost(data[i]);
+        }
+    }
+    document.getElementById('postField').innerHTML = content;
+}
+
