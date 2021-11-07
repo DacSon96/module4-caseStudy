@@ -61,9 +61,9 @@ public class AuthenticationController {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role(2L, "ROLE_USER"));
         user.setRoles(roles);
-        user.setIntro("Your bio ...");
-        user.setWork("Your work ...");
-        user.setAddress("Your address ...");
+        user.setIntro("Bio");
+        user.setWork("Work");
+        user.setAddress("Address");
         user.setAvatar("/images/default-avatar.png");
         user.setCover("/images/default-cover.png");
         userService.save(user);

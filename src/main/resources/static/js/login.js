@@ -148,7 +148,7 @@ function clear () {
     rePassword = $('#register-re-password').val('');
     email = $('#register-email').val('');
     $('#registration-form').data('validator').resetForm();
-}
+};
 
 
 // // SHOW & HIDE PASSWORD

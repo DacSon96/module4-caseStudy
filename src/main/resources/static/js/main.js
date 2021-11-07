@@ -1,8 +1,10 @@
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
+
 $(document).ready(function (){
     getUserById();
 });
+
 
 function getUserById(){
     $.ajax({
@@ -34,7 +36,6 @@ function getUserById(){
 
 function editUserInfo() {
     let form = new FormData($('#edit-user-info')[0]);
-
     $.ajax({
         headers: {
             'Authorization': 'Bearer ' + currentUser.accessToken
@@ -47,13 +48,15 @@ function editUserInfo() {
         contentType: false,
         cache: false,
         success: function () {
-            location.href = "/profile"
+            location.href = "/profile";
+            showToast();
         }
     })
-}
+};
+
 
 function showToast() {
-    let toastLiveExample = document.getElementById('liveToast')
-    let toast = new bootstrap.Toast(toastLiveExample)
-    toast.show()
-}
+    let toastLiveExample = document.getElementById('editInfoToast');
+    let toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+};
