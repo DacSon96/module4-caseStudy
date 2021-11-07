@@ -17,11 +17,11 @@ function getUserById(){
             let avatar = `<img src="${user.avatar}" alt="avatarImage" class="dashboard-img">`
             let intro = `<h4>intro</h4><p>${user.intro}</p><hr>`
             let information = `<a href="#"><i class="fas fa-briefcase"></i>
-                              <p>${user.work}</p>
-                          </a>
-                          <a href="#"><i class="fas fa-home"></i>
-                              <p>${user.address}</p>
-                          </a>`
+                                   <p>${user.work}</p>
+                               </a>
+                               <a href="#"><i class="fas fa-home"></i>
+                                   <p>${user.address}</p>
+                               </a>`
             $('.my-username').html(username);
             $('.my-cover').html(cover);
             $('.my-avatar').html(avatar);
@@ -30,4 +30,3 @@ function getUserById(){
         }
     })
 };
-
