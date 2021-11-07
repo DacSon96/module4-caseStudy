@@ -117,7 +117,8 @@ function register() {
         success: function (result) {
             localStorage.setItem('currentUser', JSON.stringify(result));
             $('#exampleModal').modal('hide');
-            alert("Registration Successful!");
+            clear();
+            showToast();
         }
     }).fail(function (data) {
         $('#register-error-box').html(
@@ -139,12 +140,15 @@ function register() {
 
 // REGISTRATION FORM CLEAR
 $('#btn-close').click(function () {
+    clear();
+});
+function clear () {
     username = $('#register-username').val('');
     password = $('#register-password').val('');
     rePassword = $('#register-re-password').val('');
     email = $('#register-email').val('');
     $('#registration-form').data('validator').resetForm();
-});
+}
 
 
 // // SHOW & HIDE PASSWORD
@@ -156,3 +160,10 @@ $('#btn-close').click(function () {
 //     this.classList.toggle('bi-eye');
 // });
 
+
+// SHOW TOAST
+function showToast() {
+    let toastLiveExample = document.getElementById('liveToast')
+    let toast = new bootstrap.Toast(toastLiveExample)
+    toast.show()
+}

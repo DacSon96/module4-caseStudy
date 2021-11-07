@@ -12,7 +12,7 @@ function getUserById(){
         url: `http://localhost:8080/users/${currentUser.id}`,
         type: 'GET',
         success: function (user) {
-            let username = `<h3 class="my-username">${user.username}</h3>`;
+            let username = `<h3 class="my-username" style="font-family: 'Poppins', sans-serif;font-size: 1.17em;font-weight: bold;margin-bottom: 0px;">${user.username}</h3>`;
             let cover = `<img src="${user.cover}" alt="coverImage" class="coverImage" style="height: 300px">`
             let avatar = `<img src="${user.avatar}" alt="avatarImage" class="dashboard-img">`
             let intro = `<h4>intro</h4><p>${user.intro}</p><hr>`
