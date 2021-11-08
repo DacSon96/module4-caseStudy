@@ -5,6 +5,30 @@ $(document).ready(function (){
     getUserById();
 });
 
+function createPost() {
+    let form = $('#post')[0];
+    let data = new FormData(form);
+    data.append('user', currentUser.id);
+    // goi ajax
+    $.ajax({
+        data: data,
+        processData: false, //prevent jQuery from automatically transforming the data into a query string
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        type: "POST",
+        //tên API
+        url: "/posts",
+
+        //xử lý khi thành công
+        success: function () {
+            $('#content').val("");
+            $('#image').val("");
+        }
+    });
+    //chặn sự kiện mặc định của thẻ
+    event.preventDefault();
+}
 
 function getUserById(){
     $.ajax({
