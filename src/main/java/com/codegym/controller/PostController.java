@@ -1,6 +1,5 @@
 package com.codegym.controller;
 
-
 import com.codegym.model.dto.PostForm;
 import com.codegym.model.entity.Post;
 import com.codegym.model.entity.User;
@@ -42,9 +41,9 @@ public class PostController {
         return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userName}")
-    public ResponseEntity<?> findAllPostByUser(@PathVariable String userName) {
-        Optional<User> user = userService.findByUsername(userName);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findAllPostByUser(@PathVariable Long id) {
+        Optional<User> user = userService.findById(id);
         if (!user.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

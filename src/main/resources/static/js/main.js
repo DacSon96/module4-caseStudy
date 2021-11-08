@@ -1,7 +1,7 @@
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 $(document).ready(function (){
-    getUserById();
+    getUserWithId();
 });
 
 function createPost() {
@@ -55,29 +55,6 @@ function getUserById(){
         }
     })
 };
-function getStory() {
-    let storyContent = "";
-    $.ajax({
-        headers: {
-            'Authorization': 'Bearer ' + currentUser.accessToken
-        },
-        url: "/users",
-        method: "GET",
-        success: function (data) {
-            for (let i = 0; i < data.length; i++) {
-                storyContent += getStoryList(data[i]);
-            }
-            document.getElementById('story-gallery').innerHTML = storyContent;
-        }
-    });
-}
-
-function getStoryList(user) {
-    return `<div class="story story2">
-                    <img src="${user.avatar}" alt="">
-                    <p>${user.username}</p>
-             </div>`
-}
 
 function editUserInfo() {
     let form = new FormData($('#edit-user-info')[0]);
@@ -104,4 +81,19 @@ function showToast() {
     let toastLiveExample = document.getElementById('editInfoToast');
     let toast = new bootstrap.Toast(toastLiveExample);
     toast.show();
-};
+}
+function getUserWithId(){
+    $.ajax({
+        url: "/users"+currentUserId,
+        method: "GET",
+        success: function (data) {
+            getUserData(data);
+        },
+    });
+}
+function getUserData(data){
+    let avatar = document.getElementsByClassName("my-avatar");
+    for (let i = 0; i < avatar.length; i++) {
+        avatar[i].src=data.avatar;
+    }
+}

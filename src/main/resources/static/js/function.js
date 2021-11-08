@@ -1,8 +1,9 @@
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 let page = 1;
-let postPerPage = 5;
+let postPerPage = 4;
 let content = "";
 let currentUserName = currentUser.username;
+let currentUserId = currentUser.id;
 var userSettings = document.querySelector(".user-settings");
 var darkBtn = document.getElementById("dark-button");
 var LoadMoreBackground = document.querySelector(".btn-LoadMore");
@@ -59,7 +60,7 @@ function getPostByPage() {
 
 function getMyPostByPage() {
     $.ajax({
-        url: "/posts/" + currentUserName,
+        url: "/posts/" + currentUserId,
         method: "GET",
         success: function (data) {
             showPost(data);
@@ -78,13 +79,16 @@ function getPost(post) {
                         </div>
                     </div>
                     <div>
-                        <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>select</option>
+                            <option value="1">Edit</option>
+                            <option value="2">Delete</option>
+                        </select>
                     </div>
                 </div>
                 <div class="status-field">
                     <p>${post.content}</a> </p>
                     <img src="${post.img}" alt="">
-
                 </div>
                 <div class="post-reaction">
                     <div class="activity-icons">
@@ -112,6 +116,3 @@ function showPost(data) {
     }
     document.getElementById('postField').innerHTML = content;
 }
-
-
-

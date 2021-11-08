@@ -4,12 +4,8 @@ import com.codegym.model.entity.User;
 import com.codegym.service.IGeneralService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.Optional;
-
 public interface IUserService extends IGeneralService<User>, UserDetailsService {
-    Optional<User> findByUsername(String username);
+    User findByUsername(String username);
 
-    Optional<User> findByEmail(String email);
-
-
+    User findByEmail(String email);
 }

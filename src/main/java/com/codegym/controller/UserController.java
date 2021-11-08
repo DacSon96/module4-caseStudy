@@ -26,20 +26,20 @@ public class UserController {
     @Value("${file-upload}")
     private String fileUpload;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<Iterable<User>> findAllUser() {
-        Iterable<User> users = userService.findAll();
+        List<User> users = (List<User>) userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> findUserById(@PathVariable Long id) {
+    public ResponseEntity<User> findUserById(@PathVariable Long id) {
         Optional<User> userOptional = userService.findById(id);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isPresent()) {
+            return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(userOptional, HttpStatus.OK);
-
     }
 
     @PutMapping("/{id}")
