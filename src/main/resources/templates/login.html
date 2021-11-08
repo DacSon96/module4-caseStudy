@@ -14,7 +14,6 @@
 </head>
 <body>
 
-
 <!--Login Form-->
 <div class="container">
     <div class="row align-items-center justify-content-center vh-100">
@@ -30,11 +29,11 @@
                            placeholder="Username">
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" id="login-password" name="loginPassword"
+                    <input type="password" class="form-control password" id="login-password" name="loginPassword"
                            placeholder="Password">
-                    <span class="bi-eye-custom">
-                    <i class="bi bi-eye-slash" id="togglePassword1"></i>
-                    </span>
+<!--                    <span class="bi-eye-custom">-->
+<!--                    <i class="bi bi-eye-slash togglePassword" id="togglePassword1"></i>-->
+<!--                    </span>-->
                 </div>
                 <button type="submit" class="btn btn-custom btn-lg btn-block mt-3">Login</button>
                 <div class="text-center pt-3 pb-3">
@@ -53,7 +52,7 @@
 
 
 <!--Register Form-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form id="registration-form" method="post">
             <div class="modal-content">
@@ -71,18 +70,18 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" style="font-size: 18px">Password</label>
-                        <input type="password" class="form-control" id="register-password" name="registerPassword">
-                        <span class="bi-eye-custom">
-                        <i class="bi bi-eye-slash" id="togglePassword2"></i>
-                        </span>
+                        <input type="password" class="form-control password" id="register-password" name="registerPassword">
+<!--                        <span class="bi-eye-custom">-->
+<!--                        <i class="bi bi-eye-slash togglePassword" id="togglePassword2"></i>-->
+<!--                        </span>-->
                         <br>
                     </div>
                     <div class="col-12">
                         <label class="form-label" style="font-size: 18px">Confirm Password</label>
-                        <input type="password" class="form-control" id="register-re-password" name="registerRePassword">
-                        <span class="bi-eye-custom">
-                        <i class="bi bi-eye-slash" id="togglePassword3"></i>
-                        </span>
+                        <input type="password" class="form-control password" id="register-re-password" name="registerRePassword">
+<!--                        <span class="bi-eye-custom">-->
+<!--                        <i class="bi bi-eye-slash togglePassword" id="togglePassword3"></i>-->
+<!--                        </span>-->
                         <br>
                     </div>
                     <div class="col-12">
@@ -92,7 +91,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-custom">Sign up</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-custom">Sign up</button>
                 </div>
             </div>
         </form>
@@ -100,6 +99,20 @@
 </div>
 </div>
 
+
+<!--Toast-Message-->
+<div class="position-fixed top-0 end-0" style="z-index: 11; background-color: rgba(255,255,255,1);">
+    <div id="registerToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="toast-header" style="background-color: #1876f2">
+            <strong class="me-auto" style="color: #fff">Success</strong>
+            <small style="color: #fff">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="color: #fff"></button>
+        </div>
+        <div class="toast-body">
+            Your account has been successfully created.
+        </div>
+    </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>

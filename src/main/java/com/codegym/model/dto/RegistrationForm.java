@@ -27,4 +27,14 @@ public class RegistrationForm {
     @NotEmpty
     @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message = "* invalid email")
     private String email;
+
+    private String intro;
+
+    private String work;
+
+    private String address;
+
+    private String avatar;
+
+    private String cover;
 }
