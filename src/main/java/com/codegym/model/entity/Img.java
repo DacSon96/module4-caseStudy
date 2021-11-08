@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Data
 @Table(name ="Image")
 public class Img {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

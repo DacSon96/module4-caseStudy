@@ -25,8 +25,6 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Post> posts;
 
     @Column(columnDefinition = "varchar(255) default 'Your bio ...'")
     private String intro;

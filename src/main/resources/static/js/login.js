@@ -148,7 +148,7 @@ function clear () {
     rePassword = $('#register-re-password').val('');
     email = $('#register-email').val('');
     $('#registration-form').data('validator').resetForm();
-}
+};
 
 
 // // SHOW & HIDE PASSWORD
@@ -163,7 +163,7 @@ function clear () {
 
 // SHOW TOAST
 function showToast() {
-    let toastLiveExample = document.getElementById('liveToast')
+    let toastLiveExample = document.getElementById('registerToast')
     let toast = new bootstrap.Toast(toastLiveExample)
     toast.show()
 }

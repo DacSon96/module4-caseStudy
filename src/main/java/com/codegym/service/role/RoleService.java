@@ -1,7 +1,7 @@
 package com.codegym.service.role;
 
 import com.codegym.model.entity.Role;
-import com.codegym.repository.IRoleRepository;
+import com.codegym.repository.user.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;

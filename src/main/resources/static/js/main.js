@@ -2,8 +2,32 @@ let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 $(document).ready(function (){
     getUserById();
-    getStory();
 });
+
+function createPost() {
+    let form = $('#post')[0];
+    let data = new FormData(form);
+    data.append('user', currentUser.id);
+    // goi ajax
+    $.ajax({
+        data: data,
+        processData: false, //prevent jQuery from automatically transforming the data into a query string
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        type: "POST",
+        //tên API
+        url: "/posts",
+
+        //xử lý khi thành công
+        success: function () {
+            $('#content').val("");
+            $('#image').val("");
+        }
+    });
+    //chặn sự kiện mặc định của thẻ
+    event.preventDefault();
+}
 
 function getUserById(){
     $.ajax({
@@ -18,11 +42,11 @@ function getUserById(){
             let avatar = `<img src="${user.avatar}" alt="avatarImage" class="dashboard-img">`
             let intro = `<h4>intro</h4><p>${user.intro}</p><hr>`
             let information = `<a href="#"><i class="fas fa-briefcase"></i>
-                                   <p>${user.work}</p>
-                               </a>
-                               <a href="#"><i class="fas fa-home"></i>
-                                   <p>${user.address}</p>
-                               </a>`
+                              <p>${user.work}</p>
+                          </a>
+                          <a href="#"><i class="fas fa-home"></i>
+                              <p>${user.address}</p>
+                          </a>`
             $('.my-username').html(username);
             $('.my-cover').html(cover);
             $('.my-avatar').html(avatar);
@@ -54,3 +78,30 @@ function getStoryList(user) {
                     <p>${user.username}</p>
              </div>`
 }
+
+function editUserInfo() {
+    let form = new FormData($('#edit-user-info')[0]);
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + currentUser.accessToken
+        },
+        url: `http://localhost:8080/users/${currentUser.id}`,
+        type: 'PUT',
+        data: form,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function () {
+            location.href = "/profile";
+            showToast();
+        }
+    })
+};
+
+
+function showToast() {
+    let toastLiveExample = document.getElementById('editInfoToast');
+    let toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+};

@@ -1,7 +1,7 @@
 package com.codegym.exception;
 
 import com.codegym.model.entity.User;
-import com.codegym.repository.IUserRepository;
+import com.codegym.repository.user.IUserRepository;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -49,7 +49,7 @@ function getUserAvatar(){
 }
 function getPostByPage() {
     $.ajax({
-        url: "/post",
+        url: "/posts",
         method: "GET",
         success: function (data) {
             showPost(data);
@@ -59,7 +59,7 @@ function getPostByPage() {
 
 function getMyPostByPage() {
     $.ajax({
-        url: "/post/" + currentUserName,
+        url: "/posts/" + currentUserName,
         method: "GET",
         success: function (data) {
             showPost(data);
