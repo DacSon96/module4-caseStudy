@@ -14,54 +14,30 @@
         let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
         function createPost() {
-            //lay du lieu
-            let post = $('#post').val();
-            let newPost = {
-                content: post,
-                user: {
-                    id: currentUser.id,
-                }
-            };
+            let form = $('#post')[0];
+            let data = new FormData(form);
+            data.append('user',currentUser.id);
             // goi ajax
             $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'authorization': 'Bearer' + currentUser.accessToken
-                },
+                data: data,
+                processData: false, //prevent jQuery from automatically transforming the data into a query string
+                contentType: false,
+                cache: false,
+                timeout: 600000,
                 type: "POST",
-                data: JSON.stringify(newPost),
                 //tên API
                 url: "/posts",
+
                 //xử lý khi thành công
                 success: function () {
-                    $('#post').val("");
+                    $('#content').val("");
+                    $('#image').val("");
                 }
             });
             //chặn sự kiện mặc định của thẻ
             event.preventDefault();
         }
 
-        function upLoadImg() {
-            var form = $('#img')[0];
-            var data = new FormData(form);
-
-            $.ajax({
-                type: "POST",
-                enctype: 'multipart/form-data',
-                url: "/posts",
-                data: data,
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (data) {
-                    alert("hi stuff worked");
-                },
-                error: function (e) {
-                    alert("nope!");
-                }
-            });
-        }
 
     </script>
 </head>
@@ -186,14 +162,14 @@
                     <small>Public <i class="fas fa-caret-down"></i></small>
                 </div>
             </div>
-            <form>
+            <form id="post">
                 <div class="post-upload-textarea">
-                    <textarea name="content" placeholder="What's on your mind, Alex?" id="post" cols="30"
+                    <textarea id="content" name="content" placeholder="What's on your mind, Alex?"  cols="30"
                               rows="3"></textarea>
                     <div class="add-post-links">
-                        <a href="#"><img src="/images/live-video.png" alt="">Live Video</a>
-                        <input type="file" name="img"><img src="/images/photo.png" alt="">Photo/Video</input>
-                        <button onclick="createPost()"><img src="/images/feeling.png" alt="">Post</button>
+
+                        <input type="file" id="image" name="img" >
+                        <button type="submit" onclick="createPost()">Post</button>
                     </div>
                 </div>
             </form>
