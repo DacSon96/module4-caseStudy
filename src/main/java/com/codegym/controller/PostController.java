@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
@@ -27,6 +28,31 @@ public class PostController {
     @Autowired
     private IPostService postService;
 
+    @Autowired
+    private IUserService userService;
+
+    @GetMapping("")
+    public ResponseEntity<Iterable<Post>> getAllPost() {
+        Iterable<Post> postIterable = postService.findAll();
+        return new ResponseEntity<>(postIterable, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/save")
+    public ResponseEntity<?> savePost(@RequestBody Post post) {
+        return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findAllPostByUser(@PathVariable Long id) {
+        Optional<User> user = userService.findById(id);
+        if (!user.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            Iterable<Post> postIterable = postService.findAllByUser(user.get());
+            return new ResponseEntity<>(postIterable, HttpStatus.OK);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Post> createPost(PostForm postForm) {
