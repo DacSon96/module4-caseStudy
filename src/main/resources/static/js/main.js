@@ -1,7 +1,6 @@
-let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 $(document).ready(function (){
-    getUserWithId();
+    getUserById();
 });
 
 function createPost() {
@@ -34,7 +33,7 @@ function getUserById(){
         headers: {
             'Authorization': 'Bearer ' + currentUser.accessToken
         },
-        url: `http://localhost:8080/users/${currentUser.id}`,
+        url: `/users/${currentUser.id}`,
         type: 'GET',
         success: function (user) {
             let username = `<h3 class="my-username" style="font-family: 'Poppins', sans-serif;font-size: 1.17em;font-weight: bold;margin-bottom: 0px;">${user.username}</h3>`;
@@ -81,19 +80,4 @@ function showToast() {
     let toastLiveExample = document.getElementById('editInfoToast');
     let toast = new bootstrap.Toast(toastLiveExample);
     toast.show();
-}
-function getUserWithId(){
-    $.ajax({
-        url: "/users"+currentUserId,
-        method: "GET",
-        success: function (data) {
-            getUserData(data);
-        },
-    });
-}
-function getUserData(data){
-    let avatar = document.getElementsByClassName("my-avatar");
-    for (let i = 0; i < avatar.length; i++) {
-        avatar[i].src=data.avatar;
-    }
 }
