@@ -34,6 +34,28 @@ function getUserById(){
 };
 
 
+function showEditInfo() {
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + currentUser.accessToken
+        },
+        url: `http://localhost:8080/users/${currentUser.id}`,
+        type: 'GET',
+        success: function (user) {
+            let intro = `<label class="form-label">Intro</label>
+                         <input class="form-control" type="text" name="intro" id="edit-intro" value="${user.intro}">`
+            let work = `<label class="form-label">Intro</label>
+                         <input class="form-control" type="text" name="intro" id="edit-work" value="${user.work}">`
+            let address = `<label class="form-label">Intro</label>
+                         <input class="form-control" type="text" name="intro" id="edit-address" value="${user.address}">`
+            $('#intro').html(intro);
+            $('#work').html(work);
+            $('#address').html(address);
+        }
+    })
+};
+
+
 function editUserInfo() {
     let form = new FormData($('#edit-user-info')[0]);
     $.ajax({
@@ -48,8 +70,8 @@ function editUserInfo() {
         contentType: false,
         cache: false,
         success: function () {
-            location.href = "/profile";
             showToast();
+            location.href = "/profile";
         }
     })
 };
