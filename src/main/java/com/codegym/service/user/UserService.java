@@ -2,7 +2,7 @@ package com.codegym.service.user;
 
 import com.codegym.model.entity.User;
 import com.codegym.model.dto.UserPrincipal;
-import com.codegym.repository.IUserRepository;
+import com.codegym.repository.user.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

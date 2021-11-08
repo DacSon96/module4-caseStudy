@@ -1,4 +1,4 @@
-package com.codegym.repository;
+package com.codegym.repository.user;
 
 import com.codegym.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

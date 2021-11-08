@@ -8,6 +8,38 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Socialbook</title>
     <script src="https://kit.fontawesome.com/ef7e2b893b.js" crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        function createPost() {
+            let form = $('#post')[0];
+            let data = new FormData(form);
+            data.append('user',currentUser.id);
+            // goi ajax
+            $.ajax({
+                data: data,
+                processData: false, //prevent jQuery from automatically transforming the data into a query string
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                type: "POST",
+                //tên API
+                url: "/posts",
+
+                //xử lý khi thành công
+                success: function () {
+                    $('#content').val("");
+                    $('#image').val("");
+                }
+            });
+            //chặn sự kiện mặc định của thẻ
+            event.preventDefault();
+        }
+
+
+    </script>
 </head>
 
 <body>
@@ -136,15 +168,17 @@
                     <small>Public <i class="fas fa-caret-down"></i></small>
                 </div>
             </div>
+            <form id="post">
+                <div class="post-upload-textarea">
+                    <textarea id="content" name="content" placeholder="What's on your mind, Alex?"  cols="30"
+                              rows="3"></textarea>
+                    <div class="add-post-links">
 
-            <div class="post-upload-textarea">
-                <textarea name="" placeholder="What's on your mind?" id="" cols="30" rows="3"></textarea>
-                <div class="add-post-links">
-                    <a href="#"><img src="/images/live-video.png" alt="">Live Video</a>
-                    <a href="#"><img src="/images/photo.png" alt="">Photo/Video</a>
-                    <a href="#"><img src="/images/feeling.png" alt="">Feeling Activity</a>
+                        <input type="file" id="image" name="img" >
+                        <button type="submit" onclick="createPost()">Post</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="status-field-container write-post-container">
