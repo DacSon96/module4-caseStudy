@@ -3,7 +3,6 @@ package com.codegym.controller;
 
 import com.codegym.model.entity.Post;
 import com.codegym.model.entity.User;
-import com.codegym.repository.IUserRepository;
 import com.codegym.service.post.IPostService;
 import com.codegym.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import com.codegym.model.dto.PostForm;
-import com.codegym.model.entity.Post;
-import com.codegym.model.entity.User;
-import com.codegym.service.post.IPostService;
-import com.codegym.service.user.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
