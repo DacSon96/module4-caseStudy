@@ -70,27 +70,13 @@ function showEditInfo() {
             let intro = `<label class="form-label">Intro</label>
                          <input class="form-control" type="text" name="intro" id="edit-intro" value="${user.intro}">`
             let work = `<label class="form-label">Work</label>
-                         <input class="form-control" type="text" name="work" id="edit-work" value="${user.work}">`
+                        <input class="form-control" type="text" name="work" id="edit-work" value="${user.work}">`
             let address = `<label class="form-label">Address</label>
-                         <input class="form-control" type="text" name="address" id="edit-address" value="${user.address}">`
-            let avatar = `<div class="row">
-                            <label class="form-label">Avatar</label>
-                            <div class="col">
-                                <input class="form-control" type="file" name="avatar">
-                            </div>
-                            <div class="col">
-                                <input class="form-control" value="${user.avatar}" readonly>
-                            </div>
-                          </div>`
-            let cover = `<div class="row">
-                            <label class="form-label">Cover</label>
-                            <div class="col">
-                                <input class="form-control" type="file" name="cover">
-                            </div>
-                            <div class="col">
-                                <input class="form-control" value="${user.cover}" readonly>
-                            </div>
-                         </div>`
+                           <input class="form-control" type="text" name="address" id="edit-address" value="${user.address}">`
+            let avatar = `<label class="form-label">Avatar</label>
+                          <input class="form-control" type="file" name="avatar">`
+            let cover = `<label class="form-label">Cover</label>
+                         <input class="form-control" type="file" name="cover">`
 
             $('#intro').html(intro);
             $('#work').html(work);

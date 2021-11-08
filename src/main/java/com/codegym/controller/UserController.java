@@ -50,24 +50,23 @@ public class UserController {
             MultipartFile userFormCover = userForm.getCover();
             String avatarFileName = userFormAvatar.getOriginalFilename();
             String coverFileName = userFormCover.getOriginalFilename();
-            if (avatarFileName.equals("")){
+            if (avatarFileName.equals("")) {
                 avatarFileName = userOptional.get().getAvatar();
-            }else {
+            } else {
                 try {
                     FileCopyUtils.copy(userFormAvatar.getBytes(), new File(fileUpload + avatarFileName));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (coverFileName.equals("")){
+            if (coverFileName.equals("")) {
                 coverFileName = userOptional.get().getCover();
-            }else {
+            } else {
                 try {
                     FileCopyUtils.copy(userFormCover.getBytes(), new File(fileUpload + coverFileName));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
             User user = new User();
             user.setId(userOptional.get().getId());
