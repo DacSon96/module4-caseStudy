@@ -1,9 +1,44 @@
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 
-$(document).ready(function (){
+$(document).ready(function () {
     getUserById();
 });
+
+function resultValueSearch() {
+    let valueSearch = $('#q').val();
+
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "get",
+        //tên API
+        url: `/users?q=${valueSearch}`,
+        //xử lý khi thành công
+        success: showResultSearch
+
+    });
+    //chặn sự kiện mặc định của thẻ
+    event.preventDefault();
+
+}
+
+
+function showResultSearch(data) {
+    let content = "";
+    for (let i = 0; i < data.length; i++) {
+        content += `<div class="online-list">
+            <div class="online">
+                <img src="${data[i].avatar}" alt="">
+            </div>
+            <p>${data[i].username}</p>
+        </div>`
+    }
+    document.getElementById('searchUser').innerHTML = content;
+}
+
 
 function createPost() {
     let form = $('#post')[0];
@@ -30,7 +65,7 @@ function createPost() {
     event.preventDefault();
 }
 
-function getUserById(){
+function getUserById() {
     $.ajax({
         headers: {
             'Authorization': 'Bearer ' + currentUser.accessToken

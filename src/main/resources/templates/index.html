@@ -23,8 +23,8 @@
     </div>
     <div class="nav-right">
         <div class="search-box">
-            <img src="/images/search.png" alt="">
-            <input type="text" placeholder="Search">
+            <button onclick="resultValueSearch()">Search</button>
+            <input type="text" placeholder="Search" id="q">
         </div>
         <div class="profile-image online" onclick="UserSettingToggle()">
             <div class="my-avatar">
@@ -151,7 +151,7 @@
             </form>
         </div>
 
-        <div class="status-field-container write-post-container">
+        <div class="status-field-container write-post-container" id="searchUser">
             <div class="user-profile-box">
                 <div class="user-profile">
                     <div class="my-avatar">

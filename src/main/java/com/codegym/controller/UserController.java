@@ -27,7 +27,10 @@ public class UserController {
     private String fileUpload;
 
     @GetMapping
-    public ResponseEntity<Iterable<User>> findAllUser() {
+    public ResponseEntity<Iterable<User>> findAllUser(@RequestParam("q") Optional<String> name) {
+        if(name.isPresent()){
+            return new ResponseEntity<>(userService.findAllByUsernameContaining(name.get()), HttpStatus.OK);
+        }
         List<User> users = (List<User>) userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -71,4 +74,5 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }
