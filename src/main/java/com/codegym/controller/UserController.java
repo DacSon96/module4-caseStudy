@@ -46,15 +46,28 @@ public class UserController {
     public ResponseEntity<User> editUserInfo(@PathVariable Long id, UserForm userForm) {
         Optional<User> userOptional = userService.findById(id);
         if (userOptional.isPresent()) {
-            MultipartFile userFormCover = userForm.getCover();
             MultipartFile userFormAvatar = userForm.getAvatar();
-            String coverFileName = userFormCover.getOriginalFilename();
+            MultipartFile userFormCover = userForm.getCover();
             String avatarFileName = userFormAvatar.getOriginalFilename();
-            try {
-                FileCopyUtils.copy(userFormCover.getBytes(), new File(fileUpload + coverFileName));
-                FileCopyUtils.copy(userFormAvatar.getBytes(), new File(fileUpload + avatarFileName));
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            String coverFileName = userFormCover.getOriginalFilename();
+            if (avatarFileName.equals("")){
+                avatarFileName = userOptional.get().getAvatar();
+            }else {
+                try {
+                    FileCopyUtils.copy(userFormAvatar.getBytes(), new File(fileUpload + avatarFileName));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (coverFileName.equals("")){
+                coverFileName = userOptional.get().getCover();
+            }else {
+                try {
+                    FileCopyUtils.copy(userFormCover.getBytes(), new File(fileUpload + coverFileName));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
             User user = new User();
             user.setId(userOptional.get().getId());
