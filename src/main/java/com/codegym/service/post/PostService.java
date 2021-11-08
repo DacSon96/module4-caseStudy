@@ -4,8 +4,10 @@ import com.codegym.model.entity.Post;
 import com.codegym.model.entity.User;
 import com.codegym.repository.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +17,8 @@ public class PostService implements IPostService {
     private IPostRepository postRepository;
 
     @Override
-    public Iterable<Post> findAll() {
-        return postRepository.findAll();
+    public List<Post> findAll() {
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
     }
 
     @Override
@@ -36,6 +38,7 @@ public class PostService implements IPostService {
 
     @Override
     public Iterable<Post> findAllByUser(User user) {
-        return postRepository.findAllByUser(user);
+        return postRepository.findAllByUserOrderByIdDesc(user);
     }
+
 }

@@ -35,16 +35,18 @@ $(document).ready(function () {
         name[i].textContent = currentUserName;
     }
     getUserDetail();
-    getMyPostByPage();
-
 })
 
 function getUserDetail() {
     document.getElementById("whatOnYourMind").placeholder = "What on your mind, " + currentUserName + "?";
-    document.getElementById("myWork").innerText = currentUser.work;
-    document.getElementById("myAddress").innerText = currentUser.address;
+    getUserAvatar();
 }
-
+function getUserAvatar(){
+    let avatarElement= document.getElementsByClassName("currentUserAvatar");
+    for (let i = 0; i < avatarElement.length; i++) {
+        avatarElement[i].src = currentUser.avatar;
+    }
+}
 function getPostByPage() {
     $.ajax({
         url: "/post",
@@ -81,7 +83,7 @@ function getPost(post) {
                 </div>
                 <div class="status-field">
                     <p>${post.content}</a> </p>
-                    <img src="/images/feed-image-1.png" alt="">
+                    <img src="${post.img}" alt="">
 
                 </div>
                 <div class="post-reaction">

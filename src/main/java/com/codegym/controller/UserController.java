@@ -28,18 +28,18 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<Iterable<User>> findAllUser() {
-        Iterable<User> users =userService.findAll();
+        Iterable<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable Long id) {
+    public ResponseEntity<Optional<User>> findUserById(@PathVariable Long id) {
         Optional<User> userOptional = userService.findById(id);
-        if (userOptional.isPresent()) {
-            return new ResponseEntity<>(userOptional.get(), HttpStatus.OK);
-        } else {
+        if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(userOptional, HttpStatus.OK);
+
     }
 
     @PutMapping("/{id}")

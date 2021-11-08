@@ -28,6 +28,7 @@ public class PostController {
         return new ResponseEntity<>(postIterable, HttpStatus.OK);
     }
 
+
     @PostMapping("/save")
     public ResponseEntity<?> savePost(@RequestBody Post post) {
         return new ResponseEntity<>(postService.save(post), HttpStatus.CREATED);
