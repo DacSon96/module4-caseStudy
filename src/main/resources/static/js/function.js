@@ -36,27 +36,51 @@ $(document).ready(function () {
         name[i].textContent = currentUserName;
     }
     getUserDetail();
-})
+    getStory();
+    $('.deletepost').click(function (event) {
+        //lay du lieu
+        let a = $(this);
+        let postId = a.attr("href");
+        if (postId == currentUserId) {
+            $.ajax({
+                type: "DELETE",
+                //tên API
+                url: `/posts/${postId}`,
+                //xử lý khi thành công
+                success: function (data) {
+                    a.parent().parent().remove();
+                }
+            })
+        }else {
+            alert("You don't have permission")
+        }
+            event.preventDefault();
+        }
+    )
+        ;
+    })
 
-function getUserDetail() {
-    document.getElementById("whatOnYourMind").placeholder = "What on your mind, " + currentUserName + "?";
-    getUserAvatar();
-}
-function getUserAvatar(){
-    let avatarElement= document.getElementsByClassName("currentUserAvatar");
-    for (let i = 0; i < avatarElement.length; i++) {
-        avatarElement[i].src = currentUser.avatar;
+    function getUserDetail() {
+        document.getElementById("whatOnYourMind").placeholder = "What on your mind, " + currentUserName + "?";
+        getUserAvatar();
     }
-}
-function getPostByPage() {
-    $.ajax({
-        url: "/posts",
-        method: "GET",
-        success: function (data) {
-            showPost(data);
-        },
-    });
-}
+
+    function getUserAvatar() {
+        let avatarElement = document.getElementsByClassName("currentUserAvatar");
+        for (let i = 0; i < avatarElement.length; i++) {
+            avatarElement[i].src = currentUser.avatar;
+        }
+    }
+
+    function getPostByPage() {
+        $.ajax({
+            url: "/posts",
+            method: "GET",
+            success: function (data) {
+                showPost(data);
+            },
+        });
+    }
 
 function getMyPostByPage() {
     $.ajax({
@@ -103,16 +127,35 @@ function getPost(post) {
             </div>`
 }
 
-function showPost(data) {
-    content = "";
-    if (data.length <= (page * postPerPage)) {
-        for (let i = 0; i < data.length; i++) {
-            content += getPost(data[i]);
+    function showPost(data) {
+        content = "";
+        if (data.length <= (page * postPerPage)) {
+            for (let i = 0; i < data.length; i++) {
+                content += getPost(data[i]);
+            }
+        } else {
+            for (let i = 0; i < page * postPerPage; i++) {
+                content += getPost(data[i]);
+            }
         }
-    } else {
-        for (let i = 0; i < page * postPerPage; i++) {
-            content += getPost(data[i]);
-        }
+        document.getElementById('postField').innerHTML = content;
     }
-    document.getElementById('postField').innerHTML = content;
+function getStory(){
+    let story = document.getElementById("story-gallery").innerHTML;
+    $.ajax({
+        url: "/posts",
+        method: "GET",
+        success: function (data) {
+            for (let i = 0; i < 4; i++) {
+                story+=showStory(data[i]);
+            }
+            document.getElementById("story-gallery").innerHTML=story;
+        }
+    });
+}
+function showStory(post){
+    return `<div class="story story2">
+                <img src="${post.user.avatar}" alt="">
+                <p>${post.user.username}</p>
+            </div>`
 }
