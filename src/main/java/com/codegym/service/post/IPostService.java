@@ -6,4 +6,5 @@ import com.codegym.service.IGeneralService;
 
 public interface IPostService extends IGeneralService<Post> {
     Iterable<Post> findAllByUser(User user);
+
 }

@@ -1,5 +1,3 @@
-let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
 
 $(document).ready(function () {
     getUserById();
@@ -36,7 +34,7 @@ function showResultSearch(data) {
             <p>${data[i].username}</p>
         </div>`
     }
-    document.getElementById('searchUser').innerHTML = content;
+    document.getElementById('postField').innerHTML = content;
 }
 
 
@@ -59,10 +57,12 @@ function createPost() {
         success: function () {
             $('#content').val("");
             $('#image').val("");
+            getMyPostByPage()
         }
     });
     //chặn sự kiện mặc định của thẻ
     event.preventDefault();
+
 }
 
 function getUserById() {
@@ -70,7 +70,7 @@ function getUserById() {
         headers: {
             'Authorization': 'Bearer ' + currentUser.accessToken
         },
-        url: `http://localhost:8080/users/${currentUser.id}`,
+        url: `/users/${currentUser.id}`,
         type: 'GET',
         success: function (user) {
             let username = `<h3 class="my-username" style="font-family: 'Poppins', sans-serif;font-size: 1.17em;font-weight: bold;margin-bottom: 0px;">${user.username}</h3>`;
@@ -91,7 +91,6 @@ function getUserById() {
         }
     })
 };
-
 
 function editUserInfo() {
     let form = new FormData($('#edit-user-info')[0]);
@@ -118,4 +117,4 @@ function showToast() {
     let toastLiveExample = document.getElementById('editInfoToast');
     let toast = new bootstrap.Toast(toastLiveExample);
     toast.show();
-};
+}
