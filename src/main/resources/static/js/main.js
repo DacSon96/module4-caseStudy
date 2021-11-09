@@ -1,6 +1,9 @@
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
 
 $(document).ready(function (){
     getUserById();
+    getOnlineList();
 });
 
 function createPost() {
@@ -33,7 +36,7 @@ function getUserById(){
         headers: {
             'Authorization': 'Bearer ' + currentUser.accessToken
         },
-        url: `/users/${currentUser.id}`,
+        url: `http://localhost:8080/users/${currentUser.id}`,
         type: 'GET',
         success: function (user) {
             let username = `<h3 class="my-username" style="font-family: 'Poppins', sans-serif;font-size: 1.17em;font-weight: bold;margin-bottom: 0px;">${user.username}</h3>`;
@@ -54,6 +57,7 @@ function getUserById(){
         }
     })
 };
+
 
 function editUserInfo() {
     let form = new FormData($('#edit-user-info')[0]);
@@ -80,4 +84,30 @@ function showToast() {
     let toastLiveExample = document.getElementById('editInfoToast');
     let toast = new bootstrap.Toast(toastLiveExample);
     toast.show();
+};
+
+function getOnlineList() {
+    let onlineList = document.getElementById("onlineList").innerHTML;
+    $.ajax({
+        headers: {
+            'Authorization': 'Bearer ' + currentUser.accessToken
+        },
+        url: `http://localhost:8080/users`,
+        type: 'GET',
+        success: function (data) {
+            for (let i = 0; i < 4; i++) {
+                onlineList += getOnline(data[i]);
+            }
+            document.getElementById("onlineList").innerHTML = onlineList;
+        }
+    })
+}
+
+function getOnline(user) {
+    return `<div class="online-list">
+            <div class="online">
+                <img src="${user.avatar}" alt="">
+            </div>
+            <p>${user.username}</p>
+        </div>`
 }
